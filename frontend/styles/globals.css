@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #3b82f6;
+  --ice-blue: #60a5fa;
+  --snow-white: #f8fafc;
+  --night-blue: #0f172a;
+  --accent-frost: #e0f2fe;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--snow-white);
+  color: var(--night-blue);
+}
+
+.glass-nav-snow {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.hero-snow-bg {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #3b82f6 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-aurora {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(224, 242, 254, 0.1) 0%, transparent 40%);
+  animation: aurora-shift 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes aurora-shift {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-10%) scale(1.1); }
+}
+
+.snow-particle {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10px) translateX(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+.course-card-snow {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.course-card-snow:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.2);
+  border-color: rgba(96, 165, 250, 0.5);
+}
+
+.hover-glow:hover {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.mascot-bounce {
+  animation: bounce-soft 3s ease-in-out infinite;
+}
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
