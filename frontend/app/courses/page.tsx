@@ -3,31 +3,17 @@ import React, { useEffect, useState } from 'react';
 import CourseGrid from '../../components/CourseGrid';
 import { Course } from '../../components/CourseCard';
 
-// Shared mock fallback array for consistency
-const frontendMockCourses: Course[] = [
-  { id: 101, title: "Python for Data Science", description: "Master Python and analyze data with Pandas.", instructor: "Dr. Angela Yu", price: 49.99, rating: 4.8, students: 120500 },
-  { id: 102, title: "Docker for Developers", description: "Learn containerization from scratch.", instructor: "Stephen Grider", price: 29.99, rating: 4.6, students: 85300 },
-  { id: 103, title: "SQL Masterclass", description: "Database design and complex queries.", instructor: "Colt Steele", price: 19.99, rating: 4.9, students: 210000 },
-  { id: 104, title: "React Full Course", description: "Modern React and Next.js.", instructor: "Maximilian S.", price: 59.99, rating: 4.9, students: 300400 },
-  { id: 105, title: "Machine Learning Bootcamp", description: "From algorithms to deep learning.", instructor: "Jose Portilla", price: 89.99, rating: 4.7, students: 450000 },
-];
+import { courses as centralCourses } from '../../data/courses';
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/mock/subjects")
-      .then(res => res.json())
-      .then((data: Course[]) => {
-        setCourses([...data, ...frontendMockCourses]);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Failed to fetch backend courses", err);
-        setCourses(frontendMockCourses);
-        setLoading(false);
-      });
+    setTimeout(() => {
+      setCourses(centralCourses);
+      setLoading(false);
+    }, 600);
   }, []);
 
   return (

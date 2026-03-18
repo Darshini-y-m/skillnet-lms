@@ -4,31 +4,13 @@ import { useRouter } from 'next/navigation';
 import LessonSidebar from '../../../components/LessonSidebar';
 import VideoPlayer from '../../../components/VideoPlayer';
 
-// Mock structure for SkillNet specific curriculum
-const skillNetSections = [
-  {
-    id: 1,
-    title: "Expedition Setup",
-    lessons: [
-      { id: 101, title: 'Preparing your gear', videoId: 'aircAruvnKk', duration: '12:45' },
-      { id: 102, title: 'Surveying the terrain', videoId: 'aircAruvnKk', duration: '18:20' },
-    ]
-  },
-  {
-    id: 2,
-    title: "Scaling the Mountain",
-    lessons: [
-      { id: 201, title: 'Core Mechanics', videoId: 'IHZwWFHWa-w', duration: '25:10' },
-      { id: 202, title: 'Avoiding the Crevasse', videoId: 'IHZwWFHWa-w', duration: '30:45' },
-      { id: 203, title: 'Reaching the Summit', videoId: 'IHZwWFHWa-w', duration: '22:15' },
-    ]
-  }
-];
+import { courses as centralCourses, Course } from '../../../data/courses';
 
 export default function LearnPage() {
   const router = useRouter();
   
-  const [activeLessonId, setActiveLessonId] = useState(skillNetSections[0].lessons[0].id);
+  const [course, setCourse] = useState<Course | null>(null);
+  const [activeLessonId, setActiveLessonId] = useState<number | null>(null);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
@@ -43,16 +25,15 @@ export default function LearnPage() {
     // Check purchase status
     const purchased = localStorage.getItem(`purchased_course_${idParam}`);
     
-    // Mock prices mapping
-    const mockPrices: Record<string, number> = {
-      "301": 0, "307": 0,
-      "302": 499, "305": 499,
-      "303": 999, "306": 999,
-      "304": 1999
-    };
+    // Find course from central data
+    const foundCourse = centralCourses.find(c => c.id.toString() === idParam);
+    if (!foundCourse) {
+      alert("Course not found!");
+      router.push("/");
+      return;
+    }
     
-    // Check if course belongs to the mock map and exists. Default to free if unknown.
-    const price = mockPrices[idParam] || 0;
+    const price = foundCourse.price || 0;
 
     if (price > 0 && purchased !== "true") {
       alert("This course requires enrollment before viewing lessons.");
@@ -60,6 +41,10 @@ export default function LearnPage() {
       return;
     }
 
+    setCourse(foundCourse);
+    if (foundCourse.sections.length > 0 && foundCourse.sections[0].lessons.length > 0) {
+      setActiveLessonId(foundCourse.sections[0].lessons[0].id);
+    }
     setIsAuthorized(true);
     setIsDataLoaded(true);
   }, [router]);
@@ -72,12 +57,14 @@ export default function LearnPage() {
     );
   }
 
-  let activeLesson = skillNetSections[0].lessons[0];
-  let currentSection = skillNetSections[0];
+  if (!course || !activeLessonId) return null;
+
+  let activeLesson = course.sections[0].lessons[0];
+  let currentSection = course.sections[0];
   let nextLessonId: number | null = null;
   
-  for (let sIdx = 0; sIdx < skillNetSections.length; sIdx++) {
-    const section = skillNetSections[sIdx];
+  for (let sIdx = 0; sIdx < course.sections.length; sIdx++) {
+    const section = course.sections[sIdx];
     const matchIdx = section.lessons.findIndex(l => l.id === activeLessonId);
     if (matchIdx !== -1) {
       activeLesson = section.lessons[matchIdx];
@@ -85,8 +72,8 @@ export default function LearnPage() {
       
       if (matchIdx + 1 < section.lessons.length) {
          nextLessonId = section.lessons[matchIdx + 1].id;
-      } else if (sIdx + 1 < skillNetSections.length) {
-         nextLessonId = skillNetSections[sIdx + 1].lessons[0].id;
+      } else if (sIdx + 1 < course.sections.length) {
+         nextLessonId = course.sections[sIdx + 1].lessons[0].id;
       }
       break;
     }
@@ -98,7 +85,7 @@ export default function LearnPage() {
     <div className="flex flex-col-reverse lg:flex-row h-[calc(100vh-72px)] overflow-hidden bg-white">
       
       <LessonSidebar 
-        sections={skillNetSections} 
+        sections={course.sections} 
         activeLessonId={activeLessonId} 
         onSelectLesson={setActiveLessonId} 
       />

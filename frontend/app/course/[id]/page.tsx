@@ -4,13 +4,7 @@ import { useParams } from 'next/navigation';
 import EnrollPanel from '../../../components/EnrollPanel';
 import { Course } from '../../../components/CourseCard';
 
-const skillNetMocks: Course[] = [
-  { id: 301, title: "Python for AI", description: "Learn Python syntax directly tailored for Artificial Intelligence.", instructor: "Dr. Frost", price: 0, difficulty: "Beginner", hours: 14 },
-  { id: 302, title: "Cloud Fundamentals", description: "Navigate the snowy peaks of AWS and Azure deployments.", instructor: "Sky Walker", price: 499, difficulty: "Intermediate", hours: 26 },
-  { id: 303, title: "Frontend Mastery", description: "Design beautiful frozen UIs and glassmorphism elements.", instructor: "Elsa Dev", price: 999, difficulty: "Advanced", hours: 35 },
-  { id: 304, title: "Machine Learning Essentials", description: "Data science without the freeze frame.", instructor: "Yann L.", price: 1999, difficulty: "Advanced", hours: 42 },
-  { id: 305, title: "DevOps Foundations", description: "Automate your deployments.", instructor: "Penguin Proc", price: 499, difficulty: "Beginner", hours: 10 },
-];
+import { courses as centralCourses } from '../../../data/courses';
 
 export default function CourseDetailPage() {
   const params = useParams();
@@ -19,23 +13,10 @@ export default function CourseDetailPage() {
   useEffect(() => {
     const idParam = Array.isArray(params.id) ? params.id[0] : params.id;
     
-    fetch("http://localhost:5000/api/mock/subjects")
-      .then(res => res.json())
-      .then((data: Course[]) => {
-        const backendMapped = data.map(c => ({
-           ...c,
-           difficulty: "Intermediate",
-           hours: 15,
-        }));
-        const fullList = [...backendMapped, ...skillNetMocks];
-        const found = fullList.find(c => c.id.toString() === idParam);
-        setCourse(found || null);
-      })
-      .catch((err) => {
-         console.error(err);
-         const found = skillNetMocks.find(c => c.id.toString() === idParam);
-         setCourse(found || null);
-      });
+    setTimeout(() => {
+      const found = centralCourses.find(c => c.id.toString() === idParam);
+      setCourse(found || null);
+    }, 400);
   }, [params.id]);
 
   if (!course) {

@@ -4,36 +4,18 @@ import HeroSnow from '../components/HeroSnow';
 import CourseGrid from '../components/CourseGrid';
 import { Course } from '../components/CourseCard';
 
-// Comprehensive mock tailored to the winter/magic theme 
-const skillNetMocks: Course[] = [
-  { id: 301, title: "Python for AI", description: "Learn Python syntax directly tailored for Artificial Intelligence.", instructor: "Dr. Frost", price: 0, difficulty: "Beginner", hours: 14 },
-  { id: 302, title: "Cloud Fundamentals", description: "Navigate the snowy peaks of AWS and Azure deployments.", instructor: "Sky Walker", price: 499, difficulty: "Intermediate", hours: 26 },
-  { id: 303, title: "Frontend Mastery", description: "Design beautiful frozen UIs and glassmorphism elements.", instructor: "Elsa Dev", price: 999, difficulty: "Advanced", hours: 35 },
-  { id: 304, title: "Machine Learning Essentials", description: "Data science without the freeze frame.", instructor: "Yann L.", price: 1999, difficulty: "Advanced", hours: 42 },
-  { id: 305, title: "DevOps Foundations", description: "Automate your deployments.", instructor: "Penguin Proc", price: 499, difficulty: "Beginner", hours: 10 },
-];
+import { courses as centralCourses } from '../data/courses';
 
 export default function HomePage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://skillnet-lms.onrender.com/api/mock/subjects")
-      .then(res => res.json())
-      .then((data: Course[]) => {
-        const backendMapped = data.map(c => ({
-          ...c,
-          difficulty: "Intermediate",
-          hours: Math.floor(Math.random() * 20) + 12,
-        }));
-        setCourses([...backendMapped, ...skillNetMocks]);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Failed to fetch backend courses", err);
-        setCourses(skillNetMocks);
-        setLoading(false);
-      });
+    // Simulate loading to keep the existing UI feel
+    setTimeout(() => {
+      setCourses(centralCourses);
+      setLoading(false);
+    }, 600);
   }, []);
 
   return (

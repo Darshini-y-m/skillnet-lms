@@ -3,39 +3,18 @@ import React, { useEffect, useState } from 'react';
 import CourseGrid from '../../components/CourseGrid';
 import { Course } from '../../components/CourseCard';
 
-// Comprehensive mock specific to NeuroLearn
-const neuroMockCourses: Course[] = [
-  { id: 201, title: "Intro to Artificial Intelligence", description: "Understand the core mathematical concepts of AI.", instructor: "Dr. Alan Turing", price: 89.99, difficulty: "Beginner", hours: 10, category: "AI" },
-  { id: 202, title: "Full Stack Web Engineering", description: "Build scalable react nodes with modern APIs.", instructor: "Ada Lovelace", price: 120.00, difficulty: "Intermediate", hours: 45, category: "Web Dev" },
-  { id: 203, title: "Cloud Infrastructure Basics", description: "Deploy zero-downtime clusters on AWS.", instructor: "Jeff Barr", price: 49.99, difficulty: "Intermediate", hours: 15, category: "Cloud" },
-  { id: 204, title: "Python for Data Science", description: "Data wrangling with Pandas and Numpy.", instructor: "Wes McKinney", price: 59.99, difficulty: "Beginner", hours: 22, category: "Data Science" },
-  { id: 205, title: "Neural Networks Explained", description: "Deep learning internals.", instructor: "Lex Fridman", price: 199.99, difficulty: "Advanced", hours: 30, category: "AI" },
-  { id: 207, title: "Next.js App Server Actions", description: "Modern React architectural designs.", instructor: "Guillermo Rauch", price: 79.99, difficulty: "Intermediate", hours: 12, category: "Web Dev" },
-  { id: 208, title: "System Design for AI Platforms", description: "Architecting large scale ML inferences.", instructor: "Alex Xu", price: 149.99, difficulty: "Advanced", hours: 25, category: "Cloud" },
-];
+import { courses as centralCourses } from '../../data/courses';
 
 export default function ExplorePage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/mock/subjects")
-      .then(res => res.json())
-      .then((data: Course[]) => {
-        const backendMapped = data.map(c => ({
-           ...c,
-           difficulty: "Intermediate",
-           hours: 15,
-           category: "AI"
-        }));
-        setCourses([...backendMapped, ...neuroMockCourses]);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Failed to fetch backend courses", err);
-        setCourses(neuroMockCourses);
-        setLoading(false);
-      });
+    // Simulate loading for UI
+    setTimeout(() => {
+      setCourses(centralCourses);
+      setLoading(false);
+    }, 600);
   }, []);
 
   return (

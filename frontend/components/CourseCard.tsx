@@ -8,10 +8,10 @@ export interface Course {
   description: string;
   instructor: string;
   price: number;
-  difficulty?: string;
-  hours?: number;
-  category?: string;
-  thumbnail?: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  hours: number;
+  category: string;
+  thumbnail: string;
   rating?: number;
   students?: number;
 }
@@ -23,9 +23,10 @@ export default function CourseCard({ course }: { course: Course }) {
     router.push(`/course/${course.id}`);
   };
 
-  const difficulty = course.difficulty || "Beginner";
-  const hours = course.hours || Math.floor(Math.random() * 20) + 5;
-  const thumbnail = course.thumbnail || `https://picsum.photos/seed/${course.id * 15}/600/400`;
+  const difficulty = course.difficulty;
+  const hours = course.hours;
+  const thumbnail = course.thumbnail;
+  const category = course.category;
 
   const getDifficultyColor = (diff: string) => {
     switch (diff.toLowerCase()) {
@@ -52,8 +53,13 @@ export default function CourseCard({ course }: { course: Course }) {
         {/* Soft frost overlay on image */}
         <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
         
-        <div className={`absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-black tracking-wider shadow-sm border ${getDifficultyColor(difficulty)}`}>
-          {difficulty}
+        <div className="absolute top-4 left-4 flex gap-2">
+          <div className={`px-3 py-1.5 rounded-full text-xs font-black tracking-wider shadow-sm border backdrop-blur-md ${getDifficultyColor(difficulty)}`}>
+            {difficulty}
+          </div>
+          <div className="px-3 py-1.5 rounded-full text-xs font-black tracking-wider shadow-sm border text-slate-700 bg-white/80 border-white/50 backdrop-blur-md">
+            {category}
+          </div>
         </div>
       </div>
       
@@ -62,7 +68,7 @@ export default function CourseCard({ course }: { course: Course }) {
           {course.title}
         </h3>
         
-        <div className="flex items-center gap-3 text-sm text-slate-500 font-bold mb-5 flex-1">
+        <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500 font-bold mb-5 flex-1">
            <div className="flex items-center gap-1.5">
              <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px]">
                {course.instructor.charAt(0)}
@@ -70,9 +76,9 @@ export default function CourseCard({ course }: { course: Course }) {
              {course.instructor}
            </div>
            <span className="w-1 h-1 rounded-full bg-slate-300"></span>
-           <span className="flex items-center gap-1">
-             <svg className="w-4 h-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-             {hours}h
+           <span className="flex items-center gap-1 text-slate-600">
+             <svg className="w-4 h-4 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+             {hours} hours content
            </span>
         </div>
 
