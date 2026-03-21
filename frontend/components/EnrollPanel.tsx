@@ -24,7 +24,7 @@ export default function EnrollPanel({ course }: { course: Course }) {
       const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
       if (!token) {
         localStorage.setItem("pending_redirect", `/learn/${course.id}`);
-        router.push("/login");
+        router.push("/signup");
       } else {
         router.push(`/learn/${course.id}`);
       }
@@ -45,7 +45,7 @@ export default function EnrollPanel({ course }: { course: Course }) {
       const token = localStorage.getItem("token");
       if (!token) {
         localStorage.setItem("pending_redirect", `/learn/${course.id}`);
-        router.push("/login");
+        router.push("/signup");
       } else {
         router.push(`/learn/${course.id}`);
       }

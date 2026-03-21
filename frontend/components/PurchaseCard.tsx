@@ -9,7 +9,7 @@ export default function PurchaseCard({ course }: { course: Course }) {
   const handleBuy = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
     if (!token) {
-      router.push("/login");
+      router.push("/signup");
     } else {
       router.push(`/learn/${course.id}`);
     }

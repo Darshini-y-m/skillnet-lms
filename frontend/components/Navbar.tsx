@@ -35,12 +35,9 @@ export default function Navbar() {
              {isLogged ? (
                <button onClick={handleLogout} className="text-slate-600 hover:text-blue-500 px-3 py-2 transition-colors">Sign out</button>
              ) : (
-               <>
-                 <Link href="/login" className="text-slate-600 hover:text-blue-500 px-3 py-2 hidden sm:block transition-colors">Login</Link>
-                 <Link href="/login" className="bg-slate-900 border border-slate-700 text-white px-5 py-2.5 rounded-xl hover:bg-slate-800 hover:shadow-lg shadow-slate-900/20 transition-all font-bold">
-                   Sign Up
-                 </Link>
-               </>
+               <Link href="/signup" className="bg-slate-900 border border-slate-700 text-white px-5 py-2.5 rounded-xl hover:bg-slate-800 hover:shadow-lg shadow-slate-900/20 transition-all font-bold">
+                 Sign Up
+               </Link>
              )}
           </div>
        </div>

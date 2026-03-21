@@ -34,7 +34,7 @@ export default function HeroSection() {
            <Link href="/explore" className="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-full font-bold shadow-[0_0_30px_rgba(99,102,241,0.4)] hover:shadow-[0_0_40px_rgba(99,102,241,0.6)] transition-all w-full sm:w-auto text-center border border-indigo-500">
               Explore Courses
            </Link>
-           <Link href="/login" className="bg-slate-800/80 backdrop-blur-md hover:bg-slate-700 border border-white/10 text-white px-8 py-4 rounded-full font-bold transition-all w-full sm:w-auto text-center">
+           <Link href="/signup" className="bg-slate-800/80 backdrop-blur-md hover:bg-slate-700 border border-white/10 text-white px-8 py-4 rounded-full font-bold transition-all w-full sm:w-auto text-center">
               Start Learning
            </Link>
         </div>

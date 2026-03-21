@@ -64,7 +64,7 @@ export default function HeroSnow() {
                <Link href="/discover" className="bg-white text-blue-600 hover:text-blue-700 hover:bg-slate-50 px-8 py-4.5 rounded-2xl font-black shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] transition-all hover:-translate-y-1 w-full sm:w-auto text-center text-lg">
                   Explore Cool Courses
                </Link>
-               <Link href="/login" className="bg-blue-600/30 backdrop-blur-lg hover:bg-blue-600/50 border border-blue-400/50 text-white px-8 py-4.5 rounded-2xl font-bold transition-all w-full sm:w-auto text-center text-lg shadow-xl shadow-blue-900/20">
+               <Link href="/signup" className="bg-blue-600/30 backdrop-blur-lg hover:bg-blue-600/50 border border-blue-400/50 text-white px-8 py-4.5 rounded-2xl font-bold transition-all w-full sm:w-auto text-center text-lg shadow-xl shadow-blue-900/20">
                   Start My Adventure
                </Link>
             </div>
