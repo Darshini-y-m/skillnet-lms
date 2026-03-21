@@ -133,21 +133,7 @@ export default function Page({ params }: { params: { id: string } }) {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 mt-16 md:-mt-8 relative z-10">
          <div className="md:w-3/5 lg:w-2/3 md:pr-12">
             
-            <h2 className="text-3xl font-black text-slate-800 mb-8 flex items-center gap-3">
-              <svg className="w-8 h-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              Expedition Preview
-            </h2>
-            
-            {/* Soft frosted player wrapper */}
-            <div className="bg-slate-900 rounded-[32px] overflow-hidden aspect-video shadow-2xl border-4 border-white mb-16 ring-1 ring-slate-200">
-               <iframe 
-                src={`${centralCourses.find(c => c.id.toString() === (Array.isArray(params.id) ? params.id[0] : params.id))?.videos?.[0]?.url || "https://www.youtube.com/embed/dQw4w9WgXcQ"}?autoplay=0&rel=0&modestbranding=1`} 
-                className="w-full h-full border-0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen
-                title="SkillNet Course Preview"
-               />
-            </div>
+
             
             <div className="mb-16">
                <h3 className="text-3xl font-black text-slate-800 mb-8">Skills You'll Discover</h3>
