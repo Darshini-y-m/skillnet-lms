@@ -27,6 +27,13 @@ app.get('/', (req, res) => {
 });
 
 /*
+Test endpoint
+*/
+app.get('/api/test', (req, res) => {
+    res.json({ message: "API working" });
+});
+
+/*
 Temporary mock courses (for frontend testing)
 */
 app.get('/api/mock/subjects', (req, res) => {
@@ -53,6 +60,7 @@ API routes
 */
 app.use('/api/auth', authRoutes);
 app.use('/api/subjects', subjectRoutes);
+app.use('/api/courses', subjectRoutes); // Alias mapped for matching frontend
 app.use('/api/videos', videoRoutes);
 app.use('/api/progress', progressRoutes);
 

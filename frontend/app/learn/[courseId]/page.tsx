@@ -22,14 +22,15 @@ export default function CourseDetailPage() {
           const rawId = resolvedParams?.courseId;
           const idParam = Array.isArray(rawId) ? rawId[0] : rawId;
           
+          const baseUrl = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
           console.log("Course ID (Learn):", idParam);
-          console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+          console.log("API URL Base:", baseUrl);
           
           if (!idParam) {
              throw new Error("No course ID provided");
           }
 
-          const url = `${process.env.NEXT_PUBLIC_API_URL}/api/subjects/${idParam}`;
+          const url = `${baseUrl}/api/courses/${idParam}`;
           console.log("Fetching:", url);
 
           const res = await fetch(url);

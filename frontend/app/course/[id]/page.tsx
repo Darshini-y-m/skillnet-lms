@@ -19,14 +19,15 @@ export default function Page({ params }: { params: { id: string } }) {
             const resolvedParams = await Promise.resolve(params);
             const idParam = resolvedParams?.id;
             
+            const baseUrl = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
             console.log("Course ID:", idParam);
-            console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+            console.log("API URL Base:", baseUrl);
             
             if (!idParam) {
                throw new Error("No course ID provided");
             }
 
-            const url = `${process.env.NEXT_PUBLIC_API_URL}/api/subjects/${idParam}`;
+            const url = `${baseUrl}/api/courses/${idParam}`;
             console.log("Fetching:", url);
 
             const res = await fetch(url);
