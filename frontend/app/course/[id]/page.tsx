@@ -1,24 +1,21 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 import EnrollPanel from '../../../components/EnrollPanel';
 import type { Course } from '../../../components/CourseCard';
 import { courses as centralCourses } from '../../../data/courses';
 
-export default function CourseDetailPage() {
-   const params = useParams<{ id: string }>();
-
+export default function Page({ params }: { params: { id: string } }) {
    const [course, setCourse] = useState<Course | null>(null);
 
    useEffect(() => {
-      const idParam = Array.isArray(params.id) ? params.id[0] : params.id;
+      const idParam = params.id;
 
       if (!idParam) return;
 
       const found = centralCourses.find(c => c.id.toString() === idParam);
       setCourse(found || null);
-   }, [params]);
+   }, [params.id]);
 
    if (!course) {
       return (
