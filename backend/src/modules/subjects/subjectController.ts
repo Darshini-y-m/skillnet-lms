@@ -41,7 +41,7 @@ export const getSubjectById = async (req: Request, res: Response) => {
   } catch (error) {
     console.warn("DB missing on Render - returning mock subject", error);
     const { subjectId } = req.params;
-
+    const subject = mockSubjects.find(s => s.id === parseInt(subjectId as string));
     if (subject) return res.json(subject);
     res.status(404).json({ error: 'Subject not found' });
   }
