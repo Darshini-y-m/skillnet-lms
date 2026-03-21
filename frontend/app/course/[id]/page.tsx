@@ -11,18 +11,37 @@ export default function Page({ params }: { params: { id: string } }) {
    const [error, setError] = useState(false);
 
    useEffect(() => {
-      const idParam = params?.id;
-      if (!idParam) return;
-
       const fetchCourse = async () => {
          try {
+            setLoading(true);
+            
+            // Handle Next.js 15+ promise params safely
+            const resolvedParams = await Promise.resolve(params);
+            const idParam = resolvedParams?.id;
+            
+            console.log("Course ID:", idParam);
             console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/subjects/${idParam}`);
-            if (!res.ok) throw new Error("API failed");
+            
+            if (!idParam) {
+               throw new Error("No course ID provided");
+            }
+
+            const url = `${process.env.NEXT_PUBLIC_API_URL}/api/subjects/${idParam}`;
+            console.log("Fetching:", url);
+
+            const res = await fetch(url);
+            console.log("Response status:", res.status);
+
+            if (!res.ok) {
+               throw new Error("Failed API");
+            }
+
             const data = await res.json();
+            console.log("Data:", data);
+
             setCourse(data);
          } catch (err) {
-            console.error("API ERROR:", err);
+            console.error("ERROR:", err);
             setError(true);
          } finally {
             setLoading(false);
@@ -30,7 +49,7 @@ export default function Page({ params }: { params: { id: string } }) {
       };
 
       fetchCourse();
-   }, [params.id]);
+   }, [params]);
 
    if (loading) {
       return (
@@ -40,8 +59,10 @@ export default function Page({ params }: { params: { id: string } }) {
       );
    }
 
-   if (error) return <div>Failed to load data</div>;
-   if (!course) return <div>Course not found</div>;
+   if (error) {
+     return <div className="p-20 text-center text-red-500 font-bold text-xl">Failed to load course. Check backend/API.</div>;
+   }
+   if (!course) return <div className="p-20 text-center font-bold text-xl">Course not found</div>;
 
    return (
       <div className="max-w-7xl mx-auto px-6 py-20 min-h-screen">
