@@ -21,13 +21,7 @@ export default function EnrollPanel({ course }: { course: Course }) {
 
   const handleEnroll = () => {
     if (course.price === 0 || isPurchased) {
-      const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
-      if (!token) {
-        localStorage.setItem("pending_redirect", `/learn/${course.id}`);
-        router.push("/signup");
-      } else {
-        router.push(`/learn/${course.id}`);
-      }
+      router.push(`/learn/${course.id}`);
     } else {
       setShowPayment(true);
     }
@@ -41,14 +35,7 @@ export default function EnrollPanel({ course }: { course: Course }) {
       setShowPayment(false);
       setIsEnrolling(false);
       alert("🎉 Enrollment successful! Welcome to the course.");
-      
-      const token = localStorage.getItem("token");
-      if (!token) {
-        localStorage.setItem("pending_redirect", `/learn/${course.id}`);
-        router.push("/signup");
-      } else {
-        router.push(`/learn/${course.id}`);
-      }
+      router.push(`/learn/${course.id}`);
     }, 1500);
   };
 
