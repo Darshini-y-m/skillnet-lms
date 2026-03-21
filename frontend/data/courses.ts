@@ -103,7 +103,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&h=400&fit=crop",
     category: "Programming",
     hours: 12,
-    videos: placeholderVideos
+    videos: [{ title: "C Programming Full Course", url: "https://www.youtube.com/embed/KJgsSFOSQv0" }]
   },
   {
     id: "course-7",
@@ -115,7 +115,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop",
     category: "Programming",
     hours: 18,
-    videos: placeholderVideos
+    videos: [{ title: "Java Full Course for Beginners", url: "https://www.youtube.com/embed/eIrMbAQSU34" }]
   },
   {
     id: "course-8",
@@ -127,7 +127,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop",
     category: "Design",
     hours: 8,
-    videos: placeholderVideos
+    videos: [{ title: "Figma UI/UX Design Tutorial", url: "https://www.youtube.com/embed/FTFaQWZBqQ8" }]
   },
   {
     id: "course-9",
@@ -139,7 +139,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
     category: "Security",
     hours: 14,
-    videos: placeholderVideos
+    videos: [{ title: "Cybersecurity Full Course", url: "https://www.youtube.com/embed/inWWhr5tnEA" }]
   },
   {
     id: "course-10",
@@ -151,7 +151,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=600&h=400&fit=crop",
     category: "System",
     hours: 10,
-    videos: placeholderVideos
+    videos: [{ title: "Linux Full Course for Beginners", url: "https://www.youtube.com/embed/IVquJh3DXUA" }]
   },
   // ------------------------------------------------------------------------------------------
   // INTERMEDIATE EXPANSION
@@ -166,7 +166,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&h=400&fit=crop",
     category: "Web Dev",
     hours: 20,
-    videos: placeholderVideos
+    videos: [{ title: "Advanced JavaScript Concepts", url: "https://www.youtube.com/embed/PoRJizFvM7s" }]
   },
   {
     id: "course-12",
@@ -178,7 +178,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
     category: "Database",
     hours: 15,
-    videos: placeholderVideos
+    videos: [{ title: "MongoDB Tutorial for Beginners", url: "https://www.youtube.com/embed/ofme2o29ngU" }]
   },
   {
     id: "course-13",
@@ -190,7 +190,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1623282033815-40b05d96c903?w=600&h=400&fit=crop",
     category: "Backend",
     hours: 16,
-    videos: placeholderVideos
+    videos: [{ title: "Express JS Crash Course", url: "https://www.youtube.com/embed/L72fhGm1tfE" }]
   },
   {
     id: "course-14",
@@ -202,7 +202,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&h=400&fit=crop",
     category: "Web Dev",
     hours: 12,
-    videos: placeholderVideos
+    videos: [{ title: "TypeScript Full Course", url: "https://www.youtube.com/embed/BwuLxPH8IDs" }]
   },
   {
     id: "course-15",
@@ -214,7 +214,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop",
     category: "Mobile",
     hours: 25,
-    videos: placeholderVideos
+    videos: [{ title: "React Native Full Course", url: "https://www.youtube.com/embed/0-S5a0eXPoc" }]
   },
   // ------------------------------------------------------------------------------------------
   // ADVANCED EXPANSION
@@ -229,7 +229,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
     category: "AI",
     hours: 35,
-    videos: placeholderVideos
+    videos: [{ title: "Machine Learning Full Course", url: "https://www.youtube.com/embed/GwIo3gDZCVQ" }]
   },
   {
     id: "course-17",
@@ -241,7 +241,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=600&h=400&fit=crop",
     category: "DevOps",
     hours: 22,
-    videos: placeholderVideos
+    videos: [{ title: "DevOps Full Course", url: "https://www.youtube.com/embed/0yWAtQ6wYNM" }]
   },
   {
     id: "course-18",
@@ -253,7 +253,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
     category: "Architecture",
     hours: 30,
-    videos: placeholderVideos
+    videos: [{ title: "Microservices Explained", url: "https://www.youtube.com/embed/y8OnoxKotPQ" }]
   },
   {
     id: "course-19",
@@ -265,7 +265,7 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
     category: "Cloud",
     hours: 40,
-    videos: placeholderVideos
+    videos: [{ title: "AWS Full Course", url: "https://www.youtube.com/embed/ulprqHHWlng" }]
   },
   {
     id: "course-20",
@@ -277,6 +277,6 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=600&h=400&fit=crop",
     category: "DevOps",
     hours: 32,
-    videos: placeholderVideos
+    videos: [{ title: "Kubernetes Full Course", url: "https://www.youtube.com/embed/X48VuDVv0do" }]
   }
 ];
