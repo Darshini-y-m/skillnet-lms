@@ -2,19 +2,9 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-export interface Course {
-  id: number;
-  title: string;
-  description: string;
-  instructor: string;
-  price: number;
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
-  hours: number;
-  category: string;
-  thumbnail: string;
-  rating?: number;
-  students?: number;
-}
+import { Course } from '../data/courses';
+
+export type { Course };
 
 export default function CourseCard({ course }: { course: Course }) {
   const router = useRouter();

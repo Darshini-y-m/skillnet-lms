@@ -24,6 +24,7 @@ export interface Course {
   rating?: number;
   students?: number;
   sections: Section[];
+  videos?: { id: number; title: string; url: string }[];
 }
 
 export const courses: Course[] = [
@@ -40,6 +41,10 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&h=400&fit=crop",
     rating: 4.8,
     students: 120450,
+    videos: [
+      { id: 101, title: "Intro to Python", url: "https://www.youtube.com/embed/_uQrJ0TkZlc" },
+      { id: 102, title: "Functions & Loops", url: "https://www.youtube.com/embed/kqtD5dpn9C8" }
+    ],
     sections: [
       {
         id: 10,
@@ -64,6 +69,10 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=400&fit=crop",
     rating: 4.7,
     students: 85000,
+    videos: [
+      { id: 201, title: "Intro to HTML", url: "https://www.youtube.com/embed/UB1O30fR-EE" },
+      { id: 202, title: "CSS Basics", url: "https://www.youtube.com/embed/yfoY53QXEnI" }
+    ],
     sections: [
       {
         id: 20,
@@ -88,6 +97,10 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&h=400&fit=crop",
     rating: 4.9,
     students: 110200,
+    videos: [
+      { id: 301, title: "Variables & Types", url: "https://www.youtube.com/embed/W6NZfCO5SIk" },
+      { id: 302, title: "DOM Manipulation", url: "https://www.youtube.com/embed/y17RuWUpz8" }
+    ],
     sections: [
       {
         id: 30,
@@ -138,6 +151,10 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop",
     rating: 4.9,
     students: 150000,
+    videos: [
+      { id: 501, title: "React Intro", url: "https://www.youtube.com/embed/bMknfKXIFA8" },
+      { id: 502, title: "Components & Props", url: "https://www.youtube.com/embed/SqcY0GlETPk" }
+    ],
     sections: [
       {
         id: 50,
@@ -162,6 +179,10 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&h=400&fit=crop",
     rating: 4.8,
     students: 76000,
+    videos: [
+      { id: 601, title: "Node Basics", url: "https://www.youtube.com/embed/Oe421EPjeBE" },
+      { id: 602, title: "Express Server", url: "https://www.youtube.com/embed/L72fhGm1tfE" }
+    ],
     sections: [
       {
         id: 60,
@@ -186,6 +207,10 @@ export const courses: Course[] = [
     thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
     rating: 4.7,
     students: 65000,
+    videos: [
+      { id: 701, title: "Relational DBs", url: "https://www.youtube.com/embed/HXV3zeQKqGY" },
+      { id: 702, title: "SQL Joins", url: "https://www.youtube.com/embed/27axs9dO7AE" }
+    ],
     sections: [
       {
         id: 70,

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { courses as centralCourses } from '../../../data/courses';
 
 export default function CourseDetailPage() {
   const params = useParams<{ courseId: string }>();
@@ -36,32 +37,37 @@ export default function CourseDetailPage() {
              if (!res.ok) throw new Error("Tree API failed (Auth/DB Missing)");
              data = await res.json();
              
-             // If backend data formatting diverges, map it gracefully
              if (!data.sections || data.sections.length === 0) {
                  throw new Error("No sections returned from backend");
+             }
+
+             // INTERCEPT: Force override limited DB datasets with our rich multi-video payloads
+             const localC = centralCourses.find(c => c.id.toString() === idParam);
+             if (localC?.videos?.length) {
+                 data.sections = [{
+                    id: 1,
+                    title: "Course Modules",
+                    videos: localC.videos
+                 }];
              }
           } catch (e) {
              console.warn("Tree API failed, using rich mock course structure directly:", e);
              
+             // Extract dynamically from central map
+             const localC = centralCourses.find(c => c.id.toString() === idParam);
+             const fallBackVids = localC?.videos || [
+                 { id: 101, title: "Course Introduction", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+                 { id: 102, title: "Setting up your environment", url: "https://www.youtube.com/embed/tgbNymZ7vqY" }
+             ];
+
              data = {
                id: idParam,
-               title: "SkillNet Interactive Learning Path",
+               title: localC?.title || "SkillNet Interactive Learning Path",
                sections: [
                  {
                    id: 1,
                    title: "Module 1: The Foundations",
-                   videos: [
-                     { id: 101, title: "Course Introduction", url: "https://www.youtube.com/embed/aircAruvnKk" },
-                     { id: 102, title: "Setting up your environment", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
-                   ]
-                 },
-                 {
-                   id: 2,
-                   title: "Module 2: Advanced Techniques",
-                   videos: [
-                     { id: 201, title: "Building the Core Architecture", url: "https://www.youtube.com/embed/tgbNymZ7vqY" },
-                     { id: 202, title: "Final Polish & Deployment", url: "https://www.youtube.com/embed/dpw9EHDh2bM" }
-                   ]
+                   videos: fallBackVids
                  }
                ]
              };

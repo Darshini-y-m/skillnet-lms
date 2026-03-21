@@ -141,7 +141,7 @@ export default function Page({ params }: { params: { id: string } }) {
             {/* Soft frosted player wrapper */}
             <div className="bg-slate-900 rounded-[32px] overflow-hidden aspect-video shadow-2xl border-4 border-white mb-16 ring-1 ring-slate-200">
                <iframe 
-                src="https://www.youtube.com/embed/aircAruvnKk?autoplay=0&rel=0&modestbranding=1" 
+                src={`${centralCourses.find(c => c.id.toString() === (Array.isArray(params.id) ? params.id[0] : params.id))?.videos?.[0]?.url || "https://www.youtube.com/embed/dQw4w9WgXcQ"}?autoplay=0&rel=0&modestbranding=1`} 
                 className="w-full h-full border-0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
