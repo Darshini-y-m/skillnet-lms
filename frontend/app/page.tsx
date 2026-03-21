@@ -9,14 +9,19 @@ import { courses as centralCourses } from '../data/courses';
 export default function HomePage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState<"All" | "Beginner" | "Intermediate" | "Advanced">("All");
 
   useEffect(() => {
-    // Simulate loading to keep the existing UI feel
+    setLoading(true);
     setTimeout(() => {
-      setCourses(centralCourses);
+      if (filter === "All") {
+        setCourses(centralCourses);
+      } else {
+        setCourses(centralCourses.filter(c => c.level === filter));
+      }
       setLoading(false);
-    }, 600);
-  }, []);
+    }, 400);
+  }, [filter]);
 
   return (
     <div className="w-full pb-32 bg-slate-50 min-h-screen font-sans relative">
@@ -27,23 +32,34 @@ export default function HomePage() {
       <div className="absolute top-[120vh] right-0 w-[500px] h-[500px] bg-sky-100/40 rounded-full blur-3xl -z-10 mix-blend-multiply"></div>
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 mt-32 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
           <div>
             <h2 className="text-4xl font-extrabold text-slate-800 tracking-tight mb-3">Trending Paths</h2>
             <p className="text-slate-500 text-lg font-medium">Join thousands of curious minds scaling these highly rated courses.</p>
           </div>
-          <button className="text-blue-600 font-bold hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-6 py-3 rounded-xl transition-colors flex items-center gap-2">
-            View all paths
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-          </button>
+          <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-[20px] shadow-inner border border-slate-200 overflow-x-auto w-full md:w-auto hide-scrollbar">
+             {["All", "Beginner", "Intermediate", "Advanced"].map((f) => (
+                <button 
+                  key={f}
+                  onClick={() => setFilter(f as any)}
+                  className={`px-5 py-3 rounded-2xl text-sm font-black transition-all whitespace-nowrap ${filter === f ? 'bg-white text-blue-600 shadow-md ring-1 ring-slate-200/50' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-200/50'}`}
+                >
+                  {f === "All" ? "All Paths" : f}
+                </button>
+             ))}
+          </div>
         </div>
 
         {loading ? (
           <div className="flex justify-center py-32">
             <div className="w-16 h-16 border-4 border-sky-100 border-t-blue-500 rounded-full animate-spin"></div>
           </div>
-        ) : (
+        ) : courses.length > 0 ? (
           <CourseGrid courses={courses.slice(0, 8)} />
+        ) : (
+          <div className="py-20 text-center text-slate-500 bg-white rounded-3xl border border-slate-200/60 shadow-sm">
+             <h3 className="text-xl font-bold mb-2">No active courses in this tier.</h3>
+          </div>
         )}
       </div>
 

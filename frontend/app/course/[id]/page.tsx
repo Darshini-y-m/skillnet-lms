@@ -1,164 +1,64 @@
 "use client";
+import React from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { courses } from '../../../data/courses';
 
-import React, { useEffect, useState } from 'react';
-import EnrollPanel from '../../../components/EnrollPanel';
-import type { Course } from '../../../components/CourseCard';
-import { courses as centralCourses } from '../../../data/courses';
+export default function CourseDetail() {
+  const params = useParams<{ id: string }>();
+  const router = useRouter();
+  
+  const idParam = Array.isArray(params.id) ? params.id[0] : params.id;
+  const course = courses.find(c => c.id === idParam);
 
-export default function Page({ params }: { params: { id: string } }) {
-   const [course, setCourse] = useState<Course | null>(null);
-   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(false);
+  if (!course) return <div className="p-20 text-center font-bold text-slate-500">Course not found</div>;
 
-   useEffect(() => {
-      const fetchCourse = async () => {
-         try {
-            setLoading(true);
-            
-            // Handle Next.js 15+ promise params safely
-            const resolvedParams = await Promise.resolve(params);
-            const idParam = resolvedParams?.id;
-            
-            const baseUrl = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
-            console.log("Course ID:", idParam);
-            console.log("API URL Base:", baseUrl);
-            
-            if (!idParam) {
-               throw new Error("No course ID provided");
-            }
-
-            const url = `${baseUrl}/api/courses/${idParam}`;
-            console.log("Fetching:", url);
-
-            const res = await fetch(url);
-            console.log("Response status:", res.status);
-
-            if (!res.ok) {
-               throw new Error("Failed API");
-            }
-
-            const data = await res.json();
-            console.log("Data:", data);
-
-            setCourse(data);
-         } catch (err) {
-            console.error("ERROR:", err);
-            setError(true);
-         } finally {
-            setLoading(false);
-         }
-      };
-
-      fetchCourse();
-   }, [params]);
-
-   if (loading) {
-      return (
-         <div className="flex justify-center py-40 min-h-screen">
-            <div className="w-16 h-16 border-4 border-sky-100 border-t-blue-500 rounded-full animate-spin"></div>
-         </div>
-      );
-   }
-
-  if (error) {
-     return <div className="p-20 text-center text-red-500 font-bold text-xl">Failed to load course. Check backend/API.</div>;
-  }
-  if (!course) return <div className="p-20 text-center font-bold text-xl">Course not found</div>;
-
-  // Fallbacks
-  const difficulty = course.difficulty || "Beginner";
-  const hours = course.hours || 10;
-  const rating = course.rating || 4.9;
-  const students = course.students || Math.floor(Math.random() * 5000) + 1000;
+  const handleBuy = () => {
+    localStorage.setItem(`purchased_${course.id}`, "true");
+    router.push(`/learn/${course.id}`);
+  };
 
   return (
-    <div className="bg-slate-50 min-h-screen pb-32">
-      
-      {/* SkillNet Course Header Scene */}
-      <div className="hero-snow-bg text-white pt-10 pb-40 relative rounded-b-[60px] shadow-lg">
-        <div className="hero-aurora"></div>
+    <div className="bg-slate-50 min-h-screen pt-32 pb-20 font-sans">
+      <div className="max-w-4xl mx-auto bg-white rounded-[40px] p-8 md:p-14 shadow-2xl border border-slate-200 relative overflow-hidden">
         
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row gap-12 relative z-20">
+        {/* Soft decorative background gradient */}
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 mix-blend-multiply pointer-events-none"></div>
+
+        <div className="relative z-10">
+           <div className="flex gap-3 mb-8">
+             <span className="px-5 py-2 bg-blue-100 text-blue-700 font-black rounded-full text-sm border border-blue-200 shadow-sm">{course.level}</span>
+             <span className="px-5 py-2 bg-slate-100 text-slate-700 font-bold rounded-full text-sm border border-slate-200 shadow-sm">{course.category}</span>
+           </div>
            
-           <div className="md:w-3/5 lg:w-2/3">
-              <div className="flex items-center gap-2 mb-8 mt-4 text-sm font-black tracking-widest text-sky-200 uppercase bg-white/10 w-fit px-4 py-1.5 rounded-full border border-sky-300/30 backdrop-blur-md">
-                 <span>Learning Path</span>
-                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" /></svg>
-                 <span>{course.title}</span>
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6 tracking-tight drop-shadow-md">
-                 {course.title}
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-2xl leading-relaxed font-medium">
-                 {course.description}
-              </p>
-              
-              <div className="flex flex-wrap items-center gap-x-8 gap-y-4 text-sm font-bold mb-8 bg-blue-900/40 p-5 rounded-2xl backdrop-blur-sm border border-blue-400/30 w-fit">
-                 <div className="flex items-center gap-1.5 bg-amber-400 text-slate-900 px-3 py-1 rounded-full text-base shadow-sm">
-                    {rating}
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                 </div>
-                 <span className="flex items-center gap-2 text-blue-100">
-                    <svg className="w-5 h-5 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                    {students.toLocaleString()} Active Learners
-                 </span>
-                 <span className="flex items-center gap-2 text-blue-100">
-                    <svg className="w-5 h-5 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                    {difficulty} Level
-                 </span>
-              </div>
-              
-              <div className="flex items-center gap-4">
-                 <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center font-black text-2xl shadow-inner border border-white/40">
-                   {course.instructor ? course.instructor.charAt(0) : "T"}
-                 </div>
-                 <div className="flex flex-col">
-                   <p className="text-sm text-sky-200 font-bold uppercase tracking-wider">Course Guide</p>
-                   <p className="font-extrabold text-xl">{course.instructor || "Team SkillNet"}</p>
-                 </div>
-              </div>
+           <h1 className="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-tight">{course.title}</h1>
+           <p className="text-xl md:text-2xl text-slate-500 mb-12 leading-relaxed font-medium">{course.description}</p>
+           
+           <div className="flex items-center gap-5 mb-12 pb-12 border-b border-slate-200">
+             <div className="w-16 h-16 bg-gradient-to-tr from-blue-600 to-sky-400 rounded-full flex items-center justify-center text-white font-black text-2xl shadow-lg ring-4 ring-blue-50">
+               {course.instructor.charAt(0)}
+             </div>
+             <div>
+               <p className="text-sm font-black text-slate-400 uppercase tracking-widest mb-1">Instructor</p>
+               <p className="text-2xl font-black text-slate-800">{course.instructor}</p>
+             </div>
            </div>
 
-           {/* Floating Frosted Rights Panel */}
-           <div className="md:w-2/5 lg:w-1/3 md:absolute md:right-6 lg:right-10 md:top-12 w-full z-30">
-              <EnrollPanel course={course} />
+           <div className="flex flex-col md:flex-row items-center justify-between bg-slate-50 p-8 md:p-10 rounded-3xl border border-slate-200 shadow-inner">
+             <div className="mb-6 md:mb-0 text-center md:text-left">
+               <p className="text-sm font-black text-slate-500 uppercase tracking-widest mb-2">Lifetime Access</p>
+               <p className="text-5xl md:text-6xl font-black text-slate-900 flex items-center gap-2">
+                 {course.price === 0 ? <span className="text-emerald-500">Free</span> : `₹${course.price}`}
+               </p>
+             </div>
+             <button 
+               onClick={handleBuy} 
+               className="px-12 py-6 bg-blue-600 hover:bg-blue-700 text-white font-black text-2xl rounded-2xl shadow-2xl shadow-blue-600/30 transition-all hover:scale-105 active:scale-95 w-full md:w-auto flex items-center justify-center gap-3"
+             >
+               Buy Course
+               <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+             </button>
            </div>
-
         </div>
-      </div>
-
-      {/* Main Course Content */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 mt-16 md:-mt-8 relative z-10">
-         <div className="md:w-3/5 lg:w-2/3 md:pr-12">
-            
-
-            
-            <div className="mb-16">
-               <h3 className="text-3xl font-black text-slate-800 mb-8">Skills You'll Discover</h3>
-               <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4">
-                  {[
-                    "Master foundational syntaxes and logic flow.",
-                    "Build responsive layouts spanning all devices.",
-                    "Handle state smoothly leading to bug-free tools.",
-                    "Create mesmerizing UIs like a true frontend artisan.",
-                    "Optimize rendering paths automatically.",
-                    "Automate testing to free up developer time."
-                  ].map((item, i) => (
-                     <div key={i} className="flex gap-4 text-slate-700 bg-white p-5 rounded-2xl shadow-sm border border-slate-100 items-start hover:-translate-y-1 transition-transform">
-                        <div className="bg-sky-100 text-sky-600 rounded-lg p-1.5 mt-0.5 shrink-0">
-                           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                           </svg>
-                        </div>
-                        <span className="font-bold leading-snug">{item}</span>
-                     </div>
-                  ))}
-               </div>
-            </div>
-            
-         </div>
       </div>
     </div>
   );
