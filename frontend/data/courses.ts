@@ -89,5 +89,194 @@ export const courses: Course[] = [
     category: "Architecture",
     hours: 45,
     videos: placeholderVideos.map(v => ({ ...v, url: "https://www.youtube.com/embed/K0Ta65OqQkY" }))
+  },
+  // ------------------------------------------------------------------------------------------
+  // BEGINNER EXPANSION
+  // ------------------------------------------------------------------------------------------
+  {
+    id: "course-6",
+    title: "C Programming Basics",
+    level: "Beginner",
+    price: 0,
+    instructor: "Dennis R.",
+    description: "Learn memory management, pointers, and foundational programming in C.",
+    thumbnail: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&h=400&fit=crop",
+    category: "Programming",
+    hours: 12,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-7",
+    title: "Java Fundamentals",
+    level: "Beginner",
+    price: 149,
+    instructor: "James G.",
+    description: "Object-oriented programming principles using the versatile Java language.",
+    thumbnail: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop",
+    category: "Programming",
+    hours: 18,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-8",
+    title: "Web Design with Figma",
+    level: "Beginner",
+    price: 199,
+    instructor: "Designer Frost",
+    description: "Create stunning UI/UX layouts and interactive prototypes without writing code.",
+    thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop",
+    category: "Design",
+    hours: 8,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-9",
+    title: "Introduction to Cybersecurity",
+    level: "Beginner",
+    price: 249,
+    instructor: "Alice Cyber",
+    description: "Protect systems, networks, and programs from digital attacks and threats.",
+    thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
+    category: "Security",
+    hours: 14,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-10",
+    title: "Linux Basics",
+    level: "Beginner",
+    price: 0,
+    instructor: "Linus T.",
+    description: "Master the command line and confidently navigate any Unix-based environment.",
+    thumbnail: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=600&h=400&fit=crop",
+    category: "System",
+    hours: 10,
+    videos: placeholderVideos
+  },
+  // ------------------------------------------------------------------------------------------
+  // INTERMEDIATE EXPANSION
+  // ------------------------------------------------------------------------------------------
+  {
+    id: "course-11",
+    title: "Advanced JavaScript Patterns",
+    level: "Intermediate",
+    price: 399,
+    instructor: "Kyle S.",
+    description: "Master closures, prototype delegation, async iteration, and functional programming.",
+    thumbnail: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&h=400&fit=crop",
+    category: "Web Dev",
+    hours: 20,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-12",
+    title: "MongoDB & NoSQL Databases",
+    level: "Intermediate",
+    price: 349,
+    instructor: "DB Admin",
+    description: "Schema design, complex aggregations, and scaling document-based databases.",
+    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    category: "Database",
+    hours: 15,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-13",
+    title: "Express.js Deep Dive",
+    level: "Intermediate",
+    price: 399,
+    instructor: "Ryan D.",
+    description: "Middleware architecture, routing strategies, and RESTful API best practices.",
+    thumbnail: "https://images.unsplash.com/photo-1623282033815-40b05d96c903?w=600&h=400&fit=crop",
+    category: "Backend",
+    hours: 16,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-14",
+    title: "TypeScript Essentials",
+    level: "Intermediate",
+    price: 299,
+    instructor: "Anders H.",
+    description: "Generics, advanced types, and strictly-typed JavaScript development.",
+    thumbnail: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&h=400&fit=crop",
+    category: "Web Dev",
+    hours: 12,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-15",
+    title: "Mobile App Development (React Native)",
+    level: "Intermediate",
+    price: 499,
+    instructor: "Native Snow",
+    description: "Compile to both iOS and Android from a single JavaScript codebase.",
+    thumbnail: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop",
+    category: "Mobile",
+    hours: 25,
+    videos: placeholderVideos
+  },
+  // ------------------------------------------------------------------------------------------
+  // ADVANCED EXPANSION
+  // ------------------------------------------------------------------------------------------
+  {
+    id: "course-16",
+    title: "Machine Learning Fundamentals",
+    level: "Advanced",
+    price: 999,
+    instructor: "Andrew N.",
+    description: "Linear regression, neural networks, and deploying predictive models.",
+    thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+    category: "AI",
+    hours: 35,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-17",
+    title: "DevOps & CI/CD Pipelines",
+    level: "Advanced",
+    price: 799,
+    instructor: "Pipeline Pro",
+    description: "Automate testing, containerization, and deployments using modern DevOps toolchains.",
+    thumbnail: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=600&h=400&fit=crop",
+    category: "DevOps",
+    hours: 22,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-18",
+    title: "Microservices Architecture",
+    level: "Advanced",
+    price: 899,
+    instructor: "Martin F.",
+    description: "Decoupling monoliths, event-driven architectures, and distributed systems.",
+    thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+    category: "Architecture",
+    hours: 30,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-19",
+    title: "Cloud Computing with AWS",
+    level: "Advanced",
+    price: 1199,
+    instructor: "Cloud Walker",
+    description: "Master EC2, S3, Lambdas, and architecting highly available cloud infrastructures.",
+    thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+    category: "Cloud",
+    hours: 40,
+    videos: placeholderVideos
+  },
+  {
+    id: "course-20",
+    title: "Kubernetes for Developers",
+    level: "Advanced",
+    price: 1299,
+    instructor: "Kube Master",
+    description: "Container orchestration, auto-scaling clusters, and managing complex workloads.",
+    thumbnail: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=600&h=400&fit=crop",
+    category: "DevOps",
+    hours: 32,
+    videos: placeholderVideos
   }
 ];

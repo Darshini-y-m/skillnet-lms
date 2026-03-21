@@ -55,7 +55,7 @@ export default function HomePage() {
             <div className="w-16 h-16 border-4 border-sky-100 border-t-blue-500 rounded-full animate-spin"></div>
           </div>
         ) : courses.length > 0 ? (
-          <CourseGrid courses={courses.slice(0, 8)} />
+          <CourseGrid courses={courses} />
         ) : (
           <div className="py-20 text-center text-slate-500 bg-white rounded-3xl border border-slate-200/60 shadow-sm">
              <h3 className="text-xl font-bold mb-2">No active courses in this tier.</h3>
