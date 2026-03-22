@@ -47,7 +47,7 @@ export default function AIMentor() {
         formData.append("file", file);
       }
 
-      const res = await fetch("http://127.0.0.1:5000/ai/chat", {
+      const res = await fetch("https://skillnet-lms.onrender.com/ai/chat", {
         method: "POST",
         body: formData,
       });
