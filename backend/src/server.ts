@@ -18,7 +18,7 @@ const startServer = async () => {
   }
 
   // Start server regardless of DB status
-  app.listen(PORT, () => {
+  app.listen(Number(PORT), '0.0.0.0', () => {
     console.log(`🚀 Server running on port ${PORT}`);
   });
 };
