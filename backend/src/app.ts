@@ -5,6 +5,7 @@ import authRoutes from './modules/auth/authRoutes';
 import subjectRoutes from './modules/subjects/subjectRoutes';
 import videoRoutes from './modules/videos/videoRoutes';
 import progressRoutes from './modules/progress/progressRoutes';
+import aiRoutes from './routes/ai';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -14,7 +15,10 @@ const app = express();
 /*
 Allow frontend (Next.js) to call backend
 */
-app.use(cors({ origin: "*" }));
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -63,6 +67,7 @@ app.use('/api/subjects', subjectRoutes);
 app.use('/api/courses', subjectRoutes); // Alias mapped for matching frontend
 app.use('/api/videos', videoRoutes);
 app.use('/api/progress', progressRoutes);
+app.use('/ai', aiRoutes);
 
 /*
 Error handler

@@ -10,11 +10,11 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <Navbar />
         <main className="min-h-screen pt-[72px]">
           {children}
