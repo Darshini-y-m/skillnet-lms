@@ -10,6 +10,7 @@ const router = express.Router();
 
 router.post("/chat", upload.single("file"), async (req, res) => {
   try {
+    console.log("🔥 API HIT FROM PROD");
     const message = req.body.message || "";
     const course = req.body.course || "web development";
     const mode = req.body.mode || "Study";
@@ -96,7 +97,7 @@ ${fullInput}`;
     res.json({ reply });
 
   } catch (error: any) {
-    console.error("AI ERROR:", error.response?.data || error.message);
+    console.error("PROD ERROR:", error.response?.data || error.message);
 
     if (error.response?.status === 503) {
       return res.json({ reply: "AI is waking up, try again in a few seconds..." });
