@@ -9,6 +9,7 @@ const upload = multer({ dest: "uploads/" });
 const router = express.Router();
 
 router.post("/chat", upload.single("file"), async (req, res) => {
+  console.log("API KEY:", process.env.OPENROUTER_API_KEY);
   try {
     console.log("🔥 API HIT FROM PROD");
     const message = req.body.message || "";
@@ -86,7 +87,8 @@ ${fullInput}`;
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json"
-        }
+        },
+        timeout: 30000
       }
     );
 
@@ -97,13 +99,13 @@ ${fullInput}`;
     res.json({ reply });
 
   } catch (error: any) {
-    console.error("PROD ERROR:", error.response?.data || error.message);
+    console.error("🔥 AI ERROR FULL:", error.response?.data || error.message);
 
     if (error.response?.status === 503) {
       return res.json({ reply: "AI is waking up, try again in a few seconds..." });
     }
 
-    return res.json({ reply: "AI is taking too long or failed" });
+    return res.json({ reply: "ERROR: " + JSON.stringify(error.response?.data || error.message) });
   }
 });
 
